@@ -100,3 +100,105 @@ Beberapa kendala yang sempat terjadi:
 Pada sesi ini, proyek berhasil disiapkan dengan baik. Struktur MVC sudah terbentuk, koneksi database berhasil dilakukan, dan aplikasi siap dikembangkan ke tahap berikutnya.
 
 ---
+
+---
+
+## 📘 Sesi 2 – Implementasi Routing
+
+### 🎯 Tujuan Sesi
+
+Pada sesi ini, kami mulai mengimplementasikan sistem routing dalam arsitektur MVC. Routing berfungsi untuk mengarahkan URL ke controller dan method yang sesuai.
+
+---
+
+### 🧠 Konsep Dasar
+
+Routing bekerja dengan pola URL sebagai berikut:
+
+```
+/controller/method
+```
+
+Contoh:
+
+```
+/home/index
+```
+
+Artinya:
+
+* Controller: HomeController
+* Method: index()
+
+---
+
+### ⚙️ Implementasi
+
+Pada sesi ini dilakukan:
+
+* Pembuatan class `Router.php`
+* Pembuatan base `Controller.php`
+* Pembuatan controller awal `HomeController`
+* Parsing URL untuk menentukan controller dan method
+
+---
+
+### 🧪 Hasil Pengujian
+
+Pengujian dilakukan dengan mengakses URL:
+
+```
+http://mvc_mahasiswa_kelompok5.test/home/index
+```
+
+Hasil:
+
+* Routing berjalan dengan baik
+* Controller berhasil dipanggil
+* Method `index()` berhasil dijalankan
+
+---
+
+### 📸 Dokumentasi Screenshot
+
+#### 1. File Router.php
+
+![Router](docs/sesi2_router.png)
+
+#### 2. HomeController
+
+![Controller](docs/sesi2_controller.png)
+
+#### 3. View Home (index.php)
+
+![View](docs/sesi2_index.png)
+
+#### 4. Hasil di Browser
+
+![Output](docs/sesi2_output.png)
+
+---
+
+### 🐛 Kendala yang Dihadapi
+
+Beberapa kendala yang muncul:
+
+* Error controller tidak ditemukan
+* Method tidak dikenali
+* Kesalahan penulisan URL
+
+---
+
+### ✅ Solusi
+
+* Memastikan nama controller sesuai dengan yang dipanggil
+* Menambahkan method yang dibutuhkan dalam controller
+* Memperbaiki parsing URL pada Router
+
+---
+
+### 📌 Kesimpulan
+
+Pada sesi ini, sistem routing berhasil diimplementasikan. Aplikasi sudah mampu mengarahkan URL ke controller dan method yang sesuai, sehingga menjadi dasar penting dalam pengembangan aplikasi berbasis MVC.
+
+---
