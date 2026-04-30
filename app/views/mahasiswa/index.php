@@ -22,12 +22,14 @@
             <th>Tanggal Lahir</th>
             <th>Jenis Kelamin</th>
             <th>Status</th>
+            <th>Aksi</th>
         </tr>
     </thead>
 
     <tbody>
         <?php if (!empty($mahasiswa)) : ?>
             <?php $no = 1; ?>
+
             <?php foreach ($mahasiswa as $mhs) : ?>
                 <tr>
                     <td><?= $no++; ?></td>
@@ -39,11 +41,20 @@
                     <td><?= htmlspecialchars($mhs['tanggal_lahir']); ?></td>
                     <td><?= htmlspecialchars($mhs['jenis_kelamin']); ?></td>
                     <td><?= $mhs['status_id'] == 1 ? 'Aktif' : 'Nonaktif'; ?></td>
+                    <td>
+                        <a href="<?= BASEURL; ?>/mahasiswa/edit/<?= $mhs['id']; ?>">Edit</a>
+
+                        <a href="<?= BASEURL; ?>/mahasiswa/delete/<?= $mhs['id']; ?>"
+                           onclick="return confirm('Yakin ingin menghapus data ini?');">
+                            Delete
+                        </a>
+                    </td>
                 </tr>
             <?php endforeach; ?>
+
         <?php else : ?>
             <tr>
-                <td colspan="9">Belum ada data mahasiswa.</td>
+                <td colspan="10">Belum ada data mahasiswa.</td>
             </tr>
         <?php endif; ?>
     </tbody>
