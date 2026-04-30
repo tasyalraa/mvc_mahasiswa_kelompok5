@@ -9,6 +9,18 @@
 <p>
     <a href="<?= BASEURL; ?>/mahasiswa/create">Tambah Mahasiswa</a>
 </p>
+<?php
+$queryString = http_build_query([
+    'search' => $search ?? '',
+    'jurusan' => $jurusan ?? ''
+]);
+?>
+
+<p>
+    <a href="<?= BASEURL; ?>/mahasiswa/exportCSV?<?= $queryString; ?>">Export CSV</a>
+    |
+    <a href="<?= BASEURL; ?>/mahasiswa/exportPDF?<?= $queryString; ?>">Export PDF</a>
+</p>
 
 <form action="<?= BASEURL; ?>/mahasiswa" method="GET" style="margin-bottom: 15px;">
     <label>Cari NPM / Nama:</label><br>
