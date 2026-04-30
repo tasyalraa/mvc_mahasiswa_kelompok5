@@ -1,5 +1,15 @@
 <h1>Data Mahasiswa</h1>
 
+<?php if (!empty($flash)) : ?>
+    <div style="padding: 10px; margin-bottom: 15px; border: 1px solid #ccc;">
+        <?= htmlspecialchars($flash['message']); ?>
+    </div>
+<?php endif; ?>
+
+<p>
+    <a href="<?= BASEURL; ?>/mahasiswa/create">Tambah Mahasiswa</a>
+</p>
+
 <table border="1" cellpadding="8" cellspacing="0">
     <thead>
         <tr>
