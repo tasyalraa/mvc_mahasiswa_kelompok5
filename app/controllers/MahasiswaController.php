@@ -3,30 +3,28 @@
 class MahasiswaController extends Controller
 {
     public function index()
-    {
-        $mahasiswaModel = $this->model('Mahasiswa');
+{
+    $mahasiswaModel = $this->model('Mahasiswa');
 
-        $data = [
-            'title' => 'Data Mahasiswa',
-            'mahasiswa' => $mahasiswaModel->getAll(),
-            'flash' => $this->flash()
-        ];
+    $search = trim($_GET['search'] ?? '');
+    $jurusan = trim($_GET['jurusan'] ?? '');
 
-        $this->view('mahasiswa/index', $data);
+    if ($search !== '' || $jurusan !== '') {
+        $mahasiswa = $mahasiswaModel->searchAndFilter($search, $jurusan);
+    } else {
+        $mahasiswa = $mahasiswaModel->getAll();
     }
 
-    public function create()
-    {
-        $data = [
-            'title' => 'Tambah Mahasiswa',
-            'flash' => $this->flash(),
-            'old' => $_SESSION['old'] ?? []
-        ];
+    $data = [
+        'title' => 'Data Mahasiswa',
+        'mahasiswa' => $mahasiswa,
+        'search' => $search,
+        'jurusan' => $jurusan,
+        'flash' => $this->flash()
+    ];
 
-        unset($_SESSION['old']);
-
-        $this->view('mahasiswa/create', $data);
-    }
+    $this->view('mahasiswa/index', $data);
+}
 
     public function store()
     {
