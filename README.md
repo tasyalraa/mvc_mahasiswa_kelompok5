@@ -202,3 +202,102 @@ Beberapa kendala yang muncul:
 Pada sesi ini, sistem routing berhasil diimplementasikan. Aplikasi sudah mampu mengarahkan URL ke controller dan method yang sesuai, sehingga menjadi dasar penting dalam pengembangan aplikasi berbasis MVC.
 
 ---
+
+---
+
+## 📘 Sesi 3 – Menampilkan Data Mahasiswa
+
+### 🎯 Tujuan Sesi
+
+Pada sesi ini, kami mulai menghubungkan aplikasi dengan database untuk menampilkan data mahasiswa. Proses ini melibatkan penggunaan Model, Controller, dan View secara terintegrasi.
+
+---
+
+### 🧠 Konsep Dasar
+
+Alur pengambilan data dalam MVC pada sesi ini adalah:
+
+```
+Controller → Model → Database → Controller → View
+```
+
+Penjelasan:
+
+* Controller memanggil Model
+* Model mengambil data dari database
+* Data dikembalikan ke Controller
+* Controller mengirim data ke View untuk ditampilkan
+
+---
+
+### ⚙️ Implementasi
+
+Pada sesi ini dilakukan:
+
+* Pembuatan Model `Mahasiswa.php`
+* Pembuatan `MahasiswaController.php`
+* Query database untuk mengambil data mahasiswa
+* Pengiriman data ke View
+* Pembuatan tampilan tabel mahasiswa
+
+---
+
+### 🧪 Hasil Pengujian
+
+Pengujian dilakukan dengan mengakses URL:
+
+```
+http://mvc_mahasiswa_kelompok5.test/mahasiswa/index
+```
+
+Hasil:
+
+* Data mahasiswa berhasil diambil dari database
+* Data ditampilkan dalam bentuk tabel
+* Tidak terdapat error pada proses pengambilan data
+
+---
+
+### 📸 Dokumentasi Screenshot
+
+#### 1. Model Mahasiswa
+
+![Model](docs/sesi3_model.png)
+
+#### 2. MahasiswaController
+
+![Controller](docs/sesi3_controller.png)
+
+#### 3. View Tabel Mahasiswa
+
+![View](docs/sesi3_views.png)
+
+#### 4. Hasil di Browser
+
+![Output](docs/sesi3_output.png)
+
+---
+
+### 🐛 Kendala yang Dihadapi
+
+Beberapa kendala yang muncul:
+
+* Data tidak tampil karena tabel kosong
+* Kesalahan query SQL
+* Data tidak terkirim dari controller ke view
+
+---
+
+### ✅ Solusi
+
+* Memastikan tabel `mahasiswa` sudah dibuat di database
+* Menambahkan data dummy untuk pengujian
+* Memperbaiki query SQL dan variabel yang dikirim ke view
+
+---
+
+### 📌 Kesimpulan
+
+Pada sesi ini, aplikasi berhasil menampilkan data dari database ke dalam tampilan web. Implementasi Model mulai berjalan dengan baik dan memperkuat konsep MVC dalam pengembangan aplikasi.
+
+---
