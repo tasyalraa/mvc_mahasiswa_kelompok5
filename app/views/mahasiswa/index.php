@@ -10,6 +10,33 @@
     <a href="<?= BASEURL; ?>/mahasiswa/create">Tambah Mahasiswa</a>
 </p>
 
+<form action="<?= BASEURL; ?>/mahasiswa" method="GET" style="margin-bottom: 15px;">
+    <label>Cari NPM / Nama:</label><br>
+    <input 
+        type="text" 
+        name="search" 
+        value="<?= htmlspecialchars($search ?? ''); ?>" 
+        placeholder="Masukkan NPM atau nama"
+    >
+
+    <br><br>
+
+    <label>Filter Jurusan:</label><br>
+    <select name="jurusan">
+        <option value="">Semua Jurusan</option>
+        <option value="Teknik Informatika" <?= ($jurusan ?? '') === 'Teknik Informatika' ? 'selected' : ''; ?>>
+            Teknik Informatika
+        </option>
+        <option value="Sistem Informasi" <?= ($jurusan ?? '') === 'Sistem Informasi' ? 'selected' : ''; ?>>
+            Sistem Informasi
+        </option>
+    </select>
+
+    <br><br>
+
+    <button type="submit">Cari</button>
+    <a href="<?= BASEURL; ?>/mahasiswa">Reset</a>
+</form>
 <table border="1" cellpadding="8" cellspacing="0">
     <thead>
         <tr>
