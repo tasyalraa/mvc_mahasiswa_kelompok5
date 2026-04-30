@@ -18,7 +18,16 @@ CREATE TABLE IF NOT EXISTS mahasiswa (
 INSERT INTO mahasiswa 
 (npm, nama_lengkap, fakultas, jurusan, tempat_lahir, tanggal_lahir, jenis_kelamin, status_id)
 VALUES
-('231001001', 'Andi Pratama', 'FTI', 'Teknik Informatika', 'Banjarmasin', '2004-01-12', 'Laki-laki', 1),
-('231001002', 'Siti Aminah', 'FTI', 'Sistem Informasi', 'Banjarbaru', '2004-03-22', 'Perempuan', 1),
-('231001003', 'Rizky Maulana', 'FTI', 'Teknik Informatika', 'Martapura', '2003-11-05', 'Laki-laki', 1)
-ON DUPLICATE KEY UPDATE npm = npm;
+('231001001', 'Noor Shahla Qeysha Revarani', 'FTI', 'Teknik Informatika', 'Banjarbaru', '2004-05-23', 'Perempuan', 1),
+('231001002', 'Tasya Rosalinda', 'FTI', 'Sistem Informasi', 'Banjarbaru', '2004-03-22', 'Perempuan', 1),
+('231001003', 'Patimatul Jahrah', 'FTI', 'Teknik Informatika', 'Martapura', '2003-11-05', 'Perempuan', 1),
+('231001004', 'Cici', 'FTI', 'Sistem Informasi', 'Banjarmasin', '2004-07-15', 'Perempuan', 1),
+('231001005', 'Patjah', 'FTI', 'Teknik Informatika', 'Banjarbaru', '2004-09-10', 'Perempuan', 1)
+ON DUPLICATE KEY UPDATE 
+    nama_lengkap = VALUES(nama_lengkap),
+    fakultas = VALUES(fakultas),
+    jurusan = VALUES(jurusan),
+    tempat_lahir = VALUES(tempat_lahir),
+    tanggal_lahir = VALUES(tanggal_lahir),
+    jenis_kelamin = VALUES(jenis_kelamin),
+    status_id = VALUES(status_id);
