@@ -2,7 +2,7 @@
 
 session_start();
 
-define('BASEURL', 'http://localhost/mvc_mahasiswa_kelompok5/public');
+define('BASEURL', 'http://localhost/mvc_mahasiswa_kelompok5');
 
 require_once '../config/database.php';
 require_once '../core/Database.php';
