@@ -406,3 +406,138 @@ Beberapa kendala yang muncul:
 Pada sesi ini, fitur penambahan data mahasiswa berhasil diimplementasikan dengan baik. Aplikasi sudah mampu menerima input dari user dan menyimpannya ke dalam database.
 
 ---
+
+---
+
+## 📘 Sesi 5 – Update dan Delete Data Mahasiswa
+
+### 🎯 Tujuan Sesi
+
+Pada sesi ini, kami mengimplementasikan fitur untuk mengubah (update) dan menghapus (delete) data mahasiswa. Dengan demikian, operasi CRUD (Create, Read, Update, Delete) pada aplikasi telah lengkap.
+
+---
+
+### 🧠 Konsep Dasar
+
+#### ✏️ Update Data
+
+```id="p3k9d2"
+View (Form Edit) → Controller → Model → Database (UPDATE)
+```
+
+Penjelasan:
+
+* User memilih data yang ingin diedit
+* Data ditampilkan pada form edit
+* Setelah diubah, data dikirim ke controller
+* Model melakukan update ke database
+
+---
+
+#### 🗑️ Delete Data
+
+```id="d7n2f1"
+View (Tombol Delete) → Controller → Model → Database (DELETE)
+```
+
+Penjelasan:
+
+* User menekan tombol delete
+* Controller menerima ID data
+* Model menghapus data dari database
+
+---
+
+### ⚙️ Implementasi
+
+Pada sesi ini dilakukan:
+
+* Penambahan tombol **Edit** dan **Delete** pada tabel mahasiswa
+* Pembuatan method `edit()`, `update()`, dan `hapus()` pada `MahasiswaController`
+* Pembuatan query `UPDATE` dan `DELETE` pada Model
+* Pembuatan form edit untuk mengubah data
+
+---
+
+### 🧪 Hasil Pengujian
+
+#### 🔹 Update Data
+
+Langkah:
+
+1. Klik tombol Edit
+2. Mengubah data mahasiswa
+3. Submit form
+
+Hasil:
+
+* Data berhasil diperbarui di database
+* Perubahan langsung terlihat pada tabel
+
+---
+
+#### 🔹 Delete Data
+
+Langkah:
+
+1. Klik tombol Delete
+2. Menghapus data
+
+Hasil:
+
+* Data berhasil dihapus dari database
+* Data tidak lagi muncul di tabel
+
+---
+
+### 📸 Dokumentasi Screenshot
+
+#### 1. Tombol Edit dan Delete pada Tabel
+
+![Tombol](docs/sesi5_tombol.png)
+
+#### 2. Form Edit Mahasiswa
+
+![Form Edit](docs/sesi5_form_edit.png)
+
+#### 3. Controller (Update & Delete)
+
+Update
+![Controller](docs/sesi5_method_update.png)
+
+Delete
+![Controller](docs/sesi5_method_delete.png)
+
+#### 4. Hasil Update Data
+
+![Update](docs/sesi5_update.png)
+
+#### 5. Hasil Delete Data
+
+![Delete](docs/sesi5_delete.png)
+
+---
+
+### 🐛 Kendala yang Dihadapi
+
+Beberapa kendala yang muncul:
+
+* Data tidak berubah karena query UPDATE tidak sesuai
+* Data tidak terhapus karena ID tidak terbaca
+* Kesalahan pengiriman data dari form ke controller
+
+---
+
+### ✅ Solusi
+
+* Memastikan query UPDATE dan DELETE sesuai dengan struktur tabel
+* Mengirim parameter ID dengan benar
+* Menyesuaikan atribut `name` pada form dengan controller
+
+---
+
+### 📌 Kesimpulan
+
+Pada sesi ini, fitur update dan delete data mahasiswa berhasil diimplementasikan. Aplikasi telah memiliki fitur CRUD lengkap dan siap untuk pengembangan lebih lanjut.
+
+---
