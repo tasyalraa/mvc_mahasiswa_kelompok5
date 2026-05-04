@@ -21,6 +21,12 @@ class Router
     {
         $url = $this->parseURL();
 
+        // Routing khusus untuk API
+        if (isset($url[0]) && $url[0] === 'api') {
+            $this->runApiRoute($url);
+            return;
+        }
+
         if (isset($url[0]) && !empty($url[0])) {
             $controllerName = ucfirst($url[0]) . 'Controller';
 
@@ -55,6 +61,55 @@ class Router
         $this->params = $url ? array_values($url) : [];
 
         call_user_func_array([$this->controller, $this->method], $this->params);
+    }
+
+    private function runApiRoute($url)
+    {
+        header('Content-Type: application/json; charset=utf-8');
+
+        $resource = $url[1] ?? null;
+        $id = $url[2] ?? null;
+        $requestMethod = $_SERVER['REQUEST_METHOD'];
+
+        if ($resource !== 'mahasiswa') {
+            http_response_code(404);
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Endpoint API tidak ditemukan.'
+            ], JSON_PRETTY_PRINT);
+            return;
+        }
+
+        require_once __DIR__ . '/../app/controllers/ApiMahasiswaController.php';
+
+        $controller = new ApiMahasiswaController();
+
+        if ($requestMethod === 'GET' && $id === null) {
+            $controller->index();
+            return;
+        }
+
+        if ($requestMethod === 'GET' && $id !== null) {
+            $controller->show($id);
+            return;
+        }
+
+        if ($requestMethod === 'POST' && $id === null) {
+            $controller->store();
+            return;
+        }
+
+        if ($requestMethod === 'PUT' && $id !== null) {
+            $controller->update($id);
+            return;
+        }
+
+        if ($requestMethod === 'DELETE' && $id !== null) {
+            $controller->delete($id);
+            return;
+        }
+
+        $controller->methodNotAllowed();
     }
 
     private function notFound($message = 'Halaman tidak ditemukan.')
