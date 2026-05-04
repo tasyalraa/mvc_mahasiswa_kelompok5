@@ -243,13 +243,29 @@ public function exportCSV()
 {
     $data = $this->getExportData();
 
+    $filename = 'data_mahasiswa_' . date('Ymd_His') . '.csv';
+
     header('Content-Type: text/csv; charset=utf-8');
-    header('Content-Disposition: attachment; filename="data_mahasiswa.csv"');
+    header('Content-Disposition: attachment; filename="' . $filename . '"');
 
     $output = fopen('php://output', 'w');
 
+    // BOM UTF-8 agar karakter terbaca baik di Excel
+    fprintf($output, chr(0xEF) . chr(0xBB) . chr(0xBF));
+
+    // Pakai titik koma agar Excel memisahkan kolom dengan benar
+    $delimiter = ';';
+
+    // Informasi laporan
+    fputcsv($output, ['Laporan Data Mahasiswa'], $delimiter);
+    fputcsv($output, ['Aplikasi MVC Mahasiswa - Kelompok 5'], $delimiter);
+    fputcsv($output, ['Tanggal Export', date('d-m-Y H:i')], $delimiter);
+    fputcsv($output, ['Total Data', count($data) . ' mahasiswa'], $delimiter);
+    fputcsv($output, [], $delimiter);
+
+    // Header tabel
     fputcsv($output, [
-        'ID',
+        'No',
         'NPM',
         'Nama Lengkap',
         'Fakultas',
@@ -258,20 +274,26 @@ public function exportCSV()
         'Tanggal Lahir',
         'Jenis Kelamin',
         'Status'
-    ]);
+    ], $delimiter);
 
-    foreach ($data as $mhs) {
-        fputcsv($output, [
-            $mhs['id'],
-            $mhs['npm'],
-            $mhs['nama_lengkap'],
-            $mhs['fakultas'],
-            $mhs['jurusan'],
-            $mhs['tempat_lahir'],
-            $mhs['tanggal_lahir'],
-            $mhs['jenis_kelamin'],
-            $mhs['status_id'] == 1 ? 'Aktif' : 'Nonaktif'
-        ]);
+    if (!empty($data)) {
+        $no = 1;
+
+        foreach ($data as $mhs) {
+            fputcsv($output, [
+                $no++,
+                $mhs['npm'],
+                $mhs['nama_lengkap'],
+                $mhs['fakultas'],
+                $mhs['jurusan'],
+                $mhs['tempat_lahir'],
+                $mhs['tanggal_lahir'],
+                $mhs['jenis_kelamin'],
+                $mhs['status_id'] == 1 ? 'Aktif' : 'Nonaktif'
+            ], $delimiter);
+        }
+    } else {
+        fputcsv($output, ['Tidak ada data mahasiswa.'], $delimiter);
     }
 
     fclose($output);
@@ -284,46 +306,186 @@ public function exportPDF()
 
     $data = $this->getExportData();
 
+    $tanggalCetak = date('d-m-Y H:i');
+    $totalData = count($data);
+
     $html = '
-    <h2>Data Mahasiswa</h2>
-    <table border="1" cellspacing="0" cellpadding="5" width="100%">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>NPM</th>
-                <th>Nama Lengkap</th>
-                <th>Fakultas</th>
-                <th>Jurusan</th>
-                <th>Tempat Lahir</th>
-                <th>Tanggal Lahir</th>
-                <th>Jenis Kelamin</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                font-size: 11px;
+                color: #222;
+                margin: 20px;
+            }
+
+            .header {
+                text-align: center;
+                margin-bottom: 18px;
+                padding-bottom: 10px;
+                border-bottom: 2px solid #222;
+            }
+
+            .header h2 {
+                margin: 0;
+                font-size: 20px;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+
+            .header p {
+                margin: 4px 0 0 0;
+                font-size: 11px;
+                color: #555;
+            }
+
+            .info {
+                margin-bottom: 12px;
+                font-size: 11px;
+            }
+
+            .info table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            .info td {
+                border: none;
+                padding: 2px 0;
+            }
+
+            .info .label {
+                width: 90px;
+                font-weight: bold;
+            }
+
+            .data-table {
+                width: 100%;
+                border-collapse: collapse;
+                table-layout: fixed;
+            }
+
+            .data-table th {
+                background-color: #1f2937;
+                color: #ffffff;
+                border: 1px solid #1f2937;
+                padding: 7px 5px;
+                font-size: 10px;
+                text-align: center;
+            }
+
+            .data-table td {
+                border: 1px solid #9ca3af;
+                padding: 6px 5px;
+                font-size: 10px;
+                vertical-align: top;
+            }
+
+            .data-table tr:nth-child(even) {
+                background-color: #f3f4f6;
+            }
+
+            .text-center {
+                text-align: center;
+            }
+
+            .status-aktif {
+                font-weight: bold;
+                color: #047857;
+            }
+
+            .status-nonaktif {
+                font-weight: bold;
+                color: #b91c1c;
+            }
+
+            .footer {
+                margin-top: 16px;
+                padding-top: 8px;
+                border-top: 1px solid #d1d5db;
+                text-align: right;
+                font-size: 9px;
+                color: #666;
+            }
+        </style>
+    </head>
+    <body>
+
+        <div class="header">
+            <h2>Laporan Data Mahasiswa</h2>
+            <p>Aplikasi MVC Mahasiswa - Kelompok 5</p>
+        </div>
+
+        <div class="info">
+            <table>
+                <tr>
+                    <td class="label">Tanggal</td>
+                    <td>: ' . htmlspecialchars($tanggalCetak) . '</td>
+                    <td class="label">Total Data</td>
+                    <td>: ' . htmlspecialchars($totalData) . ' mahasiswa</td>
+                </tr>
+            </table>
+        </div>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th style="width: 4%;">No</th>
+                    <th style="width: 10%;">NPM</th>
+                    <th style="width: 21%;">Nama Lengkap</th>
+                    <th style="width: 8%;">Fakultas</th>
+                    <th style="width: 15%;">Jurusan</th>
+                    <th style="width: 12%;">Tempat Lahir</th>
+                    <th style="width: 11%;">Tanggal Lahir</th>
+                    <th style="width: 10%;">Jenis Kelamin</th>
+                    <th style="width: 9%;">Status</th>
+                </tr>
+            </thead>
+            <tbody>
     ';
 
-    foreach ($data as $mhs) {
-        $status = $mhs['status_id'] == 1 ? 'Aktif' : 'Nonaktif';
+    if (!empty($data)) {
+        $no = 1;
 
+        foreach ($data as $mhs) {
+            $status = $mhs['status_id'] == 1 ? 'Aktif' : 'Nonaktif';
+            $statusClass = $mhs['status_id'] == 1 ? 'status-aktif' : 'status-nonaktif';
+
+            $html .= '
+                <tr>
+                    <td class="text-center">' . $no++ . '</td>
+                    <td>' . htmlspecialchars($mhs['npm']) . '</td>
+                    <td>' . htmlspecialchars($mhs['nama_lengkap']) . '</td>
+                    <td class="text-center">' . htmlspecialchars($mhs['fakultas']) . '</td>
+                    <td>' . htmlspecialchars($mhs['jurusan']) . '</td>
+                    <td>' . htmlspecialchars($mhs['tempat_lahir']) . '</td>
+                    <td class="text-center">' . htmlspecialchars($mhs['tanggal_lahir']) . '</td>
+                    <td class="text-center">' . htmlspecialchars($mhs['jenis_kelamin']) . '</td>
+                    <td class="text-center ' . $statusClass . '">' . htmlspecialchars($status) . '</td>
+                </tr>
+            ';
+        }
+    } else {
         $html .= '
             <tr>
-                <td>' . htmlspecialchars($mhs['id']) . '</td>
-                <td>' . htmlspecialchars($mhs['npm']) . '</td>
-                <td>' . htmlspecialchars($mhs['nama_lengkap']) . '</td>
-                <td>' . htmlspecialchars($mhs['fakultas']) . '</td>
-                <td>' . htmlspecialchars($mhs['jurusan']) . '</td>
-                <td>' . htmlspecialchars($mhs['tempat_lahir']) . '</td>
-                <td>' . htmlspecialchars($mhs['tanggal_lahir']) . '</td>
-                <td>' . htmlspecialchars($mhs['jenis_kelamin']) . '</td>
-                <td>' . htmlspecialchars($status) . '</td>
+                <td colspan="9" class="text-center">Tidak ada data mahasiswa.</td>
             </tr>
         ';
     }
 
     $html .= '
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+
+        <div class="footer">
+            Dicetak otomatis dari sistem MVC Mahasiswa.
+        </div>
+
+    </body>
+    </html>
     ';
 
     $dompdf = new \Dompdf\Dompdf();
