@@ -735,3 +735,78 @@ Hasil yang diperoleh:
 Pada sesi ini, implementasi Bootstrap berhasil meningkatkan tampilan aplikasi menjadi lebih modern, responsif, dan konsisten. Hal ini membuat aplikasi lebih nyaman digunakan oleh pengguna.
 
 ---
+
+---
+
+## 📘 Sesi 8 – Export Data dan Dokumentasi Akhir
+
+### 🎯 Tujuan Sesi
+
+Pada sesi ini, kami melakukan pengujian fitur export data serta menyusun dokumentasi akhir proyek. Fitur export memungkinkan data mahasiswa diunduh dalam format CSV dan PDF.
+
+---
+
+### ⚙️ Implementasi
+
+Pada sesi ini dilakukan:
+
+* Pengujian fitur **Export CSV**
+* Pengujian fitur **Export PDF**
+* Memastikan file dapat diunduh dan dibuka dengan baik
+* Menyusun dokumentasi akhir dalam file README.md
+
+---
+
+### 🧪 Hasil Pengujian
+
+#### 🔹 Export CSV
+
+Langkah:
+
+1. Klik tombol Export CSV
+2. File berhasil diunduh
+3. File dibuka menggunakan Microsoft Excel
+
+Hasil:
+
+* Data mahasiswa tampil lengkap dalam bentuk tabel
+* Format file sesuai dan dapat dibaca dengan baik
+
+---
+
+#### 🔹 Export PDF
+
+Langkah:
+
+1. Klik tombol Export PDF
+2. File berhasil diunduh
+3. File dibuka menggunakan PDF viewer
+
+Hasil:
+
+* Data mahasiswa ditampilkan dalam bentuk tabel
+* Tampilan rapi dan mudah dibaca
+
+---
+
+### 📸 Dokumentasi Screenshot
+
+#### 1. Tombol Export pada Halaman
+
+![Export Button](docs/sesi8_export_button.png)
+
+#### 2. Hasil Export CSV (Excel)
+
+![CSV](docs/sesi8_csv_excel.png)
+
+#### 3. Hasil Export PDF
+
+![PDF](docs/sesi8_pdf.png)
+
+---
+
+### 📌 Kesimpulan
+
+Fitur export data berhasil diimplementasikan dengan baik. Data mahasiswa dapat diunduh dalam format CSV dan PDF serta dapat dibuka tanpa kendala. Dokumentasi akhir juga telah disusun sebagai rangkuman seluruh proses pengembangan aplikasi.
+
+---
