@@ -301,3 +301,108 @@ Beberapa kendala yang muncul:
 Pada sesi ini, aplikasi berhasil menampilkan data dari database ke dalam tampilan web. Implementasi Model mulai berjalan dengan baik dan memperkuat konsep MVC dalam pengembangan aplikasi.
 
 ---
+
+---
+
+## 📘 Sesi 4 – Menambahkan Data Mahasiswa
+
+### 🎯 Tujuan Sesi
+
+Pada sesi ini, kami mengimplementasikan fitur untuk menambahkan data mahasiswa ke dalam database melalui form. Proses ini melibatkan interaksi antara View, Controller, dan Model.
+
+---
+
+### 🧠 Konsep Dasar
+
+Alur penambahan data dalam MVC adalah:
+
+```id="n3k8f2"
+View (Form) → Controller → Model → Database
+```
+
+Penjelasan:
+
+* User mengisi form pada View
+* Data dikirim ke Controller menggunakan method POST
+* Controller memproses dan meneruskan ke Model
+* Model menyimpan data ke database
+
+---
+
+### ⚙️ Implementasi
+
+Pada sesi ini dilakukan:
+
+* Pembuatan form tambah data mahasiswa pada View
+* Penambahan method pada `MahasiswaController` untuk menangani input
+* Penambahan fungsi insert pada Model `Mahasiswa`
+* Proses penyimpanan data ke database
+
+---
+
+### 🧪 Hasil Pengujian
+
+Pengujian dilakukan dengan mengakses URL:
+
+```id="r6f2q1"
+http://mvc_mahasiswa_kelompok5.test/mahasiswa/tambah
+```
+
+Langkah pengujian:
+
+1. Mengisi form data mahasiswa
+2. Menekan tombol submit
+3. Sistem menyimpan data ke database
+4. Data baru muncul pada tabel mahasiswa
+
+Hasil:
+
+* Data berhasil ditambahkan ke database
+* Tidak terjadi error saat proses input
+* Tampilan tabel berhasil diperbarui
+
+---
+
+### 📸 Dokumentasi Screenshot
+
+#### 1. Form Tambah Mahasiswa
+
+![Form](docs/sesi4_form.png)
+
+#### 2. MahasiswaController (Method Tambah)
+
+![Controller](docs/sesi4_controller.png)
+
+#### 3. Model (Query Insert)
+
+![Model](docs/sesi4_model.png)
+
+#### 4. Hasil di Tabel
+
+![Output](docs/sesi4_output.png)
+
+---
+
+### 🐛 Kendala yang Dihadapi
+
+Beberapa kendala yang muncul:
+
+* Method tidak ditemukan karena perbedaan nama URL
+* Data tidak tersimpan akibat kesalahan query
+* Input form tidak terbaca karena name tidak sesuai
+
+---
+
+### ✅ Solusi
+
+* Menyesuaikan URL dengan method pada controller
+* Memperbaiki query INSERT pada Model
+* Menyamakan atribut `name` pada form dengan yang diproses di Controller
+
+---
+
+### 📌 Kesimpulan
+
+Pada sesi ini, fitur penambahan data mahasiswa berhasil diimplementasikan dengan baik. Aplikasi sudah mampu menerima input dari user dan menyimpannya ke dalam database.
+
+---
