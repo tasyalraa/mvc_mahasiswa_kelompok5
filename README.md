@@ -541,3 +541,136 @@ Beberapa kendala yang muncul:
 Pada sesi ini, fitur update dan delete data mahasiswa berhasil diimplementasikan. Aplikasi telah memiliki fitur CRUD lengkap dan siap untuk pengembangan lebih lanjut.
 
 ---
+
+---
+
+## 📘 Sesi 6 – Search dan Filter Data Mahasiswa
+
+### 🎯 Tujuan Sesi
+
+Pada sesi ini, kami mengimplementasikan fitur pencarian (search) dan penyaringan (filter) data mahasiswa. Fitur ini memungkinkan pengguna untuk menampilkan data sesuai dengan kata kunci atau kategori tertentu.
+
+---
+
+### 🧠 Konsep Dasar
+
+#### 🔍 Search Data
+
+```id="k2n8x1"
+SELECT * FROM mahasiswa WHERE nama_lengkap LIKE '%keyword%' OR npm LIKE '%keyword%'
+```
+
+Penjelasan:
+
+* Digunakan untuk mencari data berdasarkan kata kunci
+* Menggunakan operator `LIKE` agar pencarian fleksibel
+
+---
+
+#### 🧩 Filter Data
+
+```id="m7p4q2"
+SELECT * FROM mahasiswa WHERE jurusan = 'Informatika'
+```
+
+Penjelasan:
+
+* Digunakan untuk menyaring data berdasarkan kategori tertentu
+* Menggunakan kondisi `WHERE`
+
+---
+
+#### 🔗 Kombinasi Search & Filter
+
+```id="v9x2l5"
+SELECT * FROM mahasiswa WHERE nama_lengkap LIKE '%keyword%' AND jurusan = 'Informatika'
+```
+
+Penjelasan:
+
+* Search dan filter dapat digunakan bersamaan
+* Query akan menyesuaikan berdasarkan input user
+
+---
+
+### ⚙️ Implementasi
+
+Pada sesi ini dilakukan:
+
+* Penambahan form search pada halaman mahasiswa
+* Penambahan dropdown filter jurusan
+* Pengambilan parameter menggunakan method GET
+* Pembuatan fungsi `searchAndFilter()` pada Model
+* Modifikasi query menggunakan kondisi dinamis
+
+---
+
+### 🧪 Hasil Pengujian
+
+Pengujian dilakukan pada halaman:
+
+```id="q3r8t1"
+http://mvc_mahasiswa_kelompok5.test/mahasiswa
+```
+
+Langkah:
+
+1. Menginput kata kunci pada kolom pencarian
+2. Memilih filter jurusan (opsional)
+3. Menekan tombol cari
+
+Hasil:
+
+* Data ditampilkan sesuai dengan kata kunci
+* Data dapat difilter berdasarkan jurusan
+* Kombinasi search dan filter berjalan dengan baik
+
+---
+
+### 📸 Dokumentasi Screenshot
+
+#### 1. Form Search dan Filter
+
+![Search Form](docs/sesi6_search_filter.png)
+
+#### 2. Controller (Logic Search & Filter)
+
+![Controller](docs/sesi6_controller.png)
+
+#### 3. Model (Query Search & Filter)
+
+![Model](docs/sesi6_model.png)
+
+#### 4. Hasil di Browser
+
+Search
+![Output](docs/sesi6_search.png)
+
+Filter
+![Output](docs/sesi6_filter.png)
+
+---
+
+### 🐛 Kendala yang Dihadapi
+
+Beberapa kendala yang muncul:
+
+* Data tidak berubah karena parameter tidak terbaca
+* Query tidak sesuai sehingga hasil tidak akurat
+* Input kosong tidak ditangani dengan baik
+
+---
+
+### ✅ Solusi
+
+* Menggunakan method GET untuk mengambil parameter dari URL
+* Menggunakan prepared statement untuk keamanan query
+* Menambahkan kondisi dinamis pada query sesuai input user
+
+---
+
+### 📌 Kesimpulan
+
+Pada sesi ini, fitur pencarian dan filter data mahasiswa berhasil diimplementasikan. Aplikasi menjadi lebih interaktif karena pengguna dapat mencari dan menyaring data sesuai kebutuhan.
+
+---
