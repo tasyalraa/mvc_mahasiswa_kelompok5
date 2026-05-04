@@ -674,3 +674,64 @@ Beberapa kendala yang muncul:
 Pada sesi ini, fitur pencarian dan filter data mahasiswa berhasil diimplementasikan. Aplikasi menjadi lebih interaktif karena pengguna dapat mencari dan menyaring data sesuai kebutuhan.
 
 ---
+
+---
+
+## 📘 Sesi 7 – Implementasi Tampilan dengan Bootstrap
+
+### 🎯 Tujuan Sesi
+
+Pada sesi ini, kami mengimplementasikan tampilan antarmuka menggunakan Bootstrap agar aplikasi memiliki desain yang lebih modern, responsif, dan konsisten.
+
+---
+
+### 🧠 Konsep Dasar
+
+Bootstrap merupakan framework CSS yang digunakan untuk mempermudah pembuatan tampilan web yang rapi dan responsif tanpa harus menulis CSS dari awal.
+
+Dengan menggunakan Bootstrap, tampilan aplikasi menjadi:
+
+* Lebih modern
+* Responsif di berbagai perangkat
+* Konsisten di setiap halaman
+
+---
+
+### ⚙️ Implementasi
+
+Pada sesi ini dilakukan:
+
+* Menambahkan Bootstrap ke dalam project melalui CDN
+* Membuat layout menggunakan `header.php` dan `footer.php`
+* Menambahkan navbar pada aplikasi
+* Menerapkan class Bootstrap pada tabel dan form
+
+---
+
+### 🧪 Hasil Pengujian
+
+Hasil yang diperoleh:
+
+* Halaman mahasiswa tampil lebih rapi dan terstruktur
+* Form input terlihat lebih jelas dan mudah digunakan
+* Tampilan aplikasi menjadi lebih menarik dibandingkan sebelumnya
+
+---
+
+### 📸 Dokumentasi Screenshot
+
+#### 1. Halaman Index Mahasiswa (Bootstrap)
+
+![Index](docs/sesi7_index_bootstrap.png)
+
+#### 2. Form Tambah Mahasiswa
+
+![Form](docs/sesi7_form_create.png)
+
+---
+
+### 📌 Kesimpulan
+
+Pada sesi ini, implementasi Bootstrap berhasil meningkatkan tampilan aplikasi menjadi lebih modern, responsif, dan konsisten. Hal ini membuat aplikasi lebih nyaman digunakan oleh pengguna.
+
+---
