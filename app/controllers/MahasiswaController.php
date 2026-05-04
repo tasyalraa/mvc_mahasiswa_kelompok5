@@ -26,6 +26,18 @@ class MahasiswaController extends Controller
     $this->view('mahasiswa/index', $data);
 }
 
+public function create()
+{
+    $data = [
+        'title' => 'Tambah Mahasiswa',
+        'flash' => $this->flash(),
+        'old' => $_SESSION['old'] ?? []
+    ];
+
+    unset($_SESSION['old']);
+
+    $this->view('mahasiswa/create', $data);
+}
     public function store()
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
