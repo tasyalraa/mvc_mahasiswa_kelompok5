@@ -250,15 +250,18 @@ public function exportCSV()
 
     $output = fopen('php://output', 'w');
 
-    // BOM UTF-8 agar karakter terbaca rapi di Excel
+    // BOM UTF-8 agar karakter terbaca baik di Excel
     fprintf($output, chr(0xEF) . chr(0xBB) . chr(0xBF));
 
-    // Baris judul laporan
-    fputcsv($output, ['Laporan Data Mahasiswa']);
-    fputcsv($output, ['Aplikasi MVC Mahasiswa - Kelompok 5']);
-    fputcsv($output, ['Tanggal Export', date('d-m-Y H:i')]);
-    fputcsv($output, ['Total Data', count($data) . ' mahasiswa']);
-    fputcsv($output, []);
+    // Pakai titik koma agar Excel memisahkan kolom dengan benar
+    $delimiter = ';';
+
+    // Informasi laporan
+    fputcsv($output, ['Laporan Data Mahasiswa'], $delimiter);
+    fputcsv($output, ['Aplikasi MVC Mahasiswa - Kelompok 5'], $delimiter);
+    fputcsv($output, ['Tanggal Export', date('d-m-Y H:i')], $delimiter);
+    fputcsv($output, ['Total Data', count($data) . ' mahasiswa'], $delimiter);
+    fputcsv($output, [], $delimiter);
 
     // Header tabel
     fputcsv($output, [
@@ -271,7 +274,7 @@ public function exportCSV()
         'Tanggal Lahir',
         'Jenis Kelamin',
         'Status'
-    ]);
+    ], $delimiter);
 
     if (!empty($data)) {
         $no = 1;
@@ -287,10 +290,10 @@ public function exportCSV()
                 $mhs['tanggal_lahir'],
                 $mhs['jenis_kelamin'],
                 $mhs['status_id'] == 1 ? 'Aktif' : 'Nonaktif'
-            ]);
+            ], $delimiter);
         }
     } else {
-        fputcsv($output, ['Tidak ada data mahasiswa.']);
+        fputcsv($output, ['Tidak ada data mahasiswa.'], $delimiter);
     }
 
     fclose($output);
