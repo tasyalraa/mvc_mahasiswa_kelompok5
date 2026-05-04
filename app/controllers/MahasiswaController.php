@@ -243,13 +243,26 @@ public function exportCSV()
 {
     $data = $this->getExportData();
 
+    $filename = 'data_mahasiswa_' . date('Ymd_His') . '.csv';
+
     header('Content-Type: text/csv; charset=utf-8');
-    header('Content-Disposition: attachment; filename="data_mahasiswa.csv"');
+    header('Content-Disposition: attachment; filename="' . $filename . '"');
 
     $output = fopen('php://output', 'w');
 
+    // BOM UTF-8 agar karakter terbaca rapi di Excel
+    fprintf($output, chr(0xEF) . chr(0xBB) . chr(0xBF));
+
+    // Baris judul laporan
+    fputcsv($output, ['Laporan Data Mahasiswa']);
+    fputcsv($output, ['Aplikasi MVC Mahasiswa - Kelompok 5']);
+    fputcsv($output, ['Tanggal Export', date('d-m-Y H:i')]);
+    fputcsv($output, ['Total Data', count($data) . ' mahasiswa']);
+    fputcsv($output, []);
+
+    // Header tabel
     fputcsv($output, [
-        'ID',
+        'No',
         'NPM',
         'Nama Lengkap',
         'Fakultas',
@@ -260,18 +273,24 @@ public function exportCSV()
         'Status'
     ]);
 
-    foreach ($data as $mhs) {
-        fputcsv($output, [
-            $mhs['id'],
-            $mhs['npm'],
-            $mhs['nama_lengkap'],
-            $mhs['fakultas'],
-            $mhs['jurusan'],
-            $mhs['tempat_lahir'],
-            $mhs['tanggal_lahir'],
-            $mhs['jenis_kelamin'],
-            $mhs['status_id'] == 1 ? 'Aktif' : 'Nonaktif'
-        ]);
+    if (!empty($data)) {
+        $no = 1;
+
+        foreach ($data as $mhs) {
+            fputcsv($output, [
+                $no++,
+                $mhs['npm'],
+                $mhs['nama_lengkap'],
+                $mhs['fakultas'],
+                $mhs['jurusan'],
+                $mhs['tempat_lahir'],
+                $mhs['tanggal_lahir'],
+                $mhs['jenis_kelamin'],
+                $mhs['status_id'] == 1 ? 'Aktif' : 'Nonaktif'
+            ]);
+        }
+    } else {
+        fputcsv($output, ['Tidak ada data mahasiswa.']);
     }
 
     fclose($output);
