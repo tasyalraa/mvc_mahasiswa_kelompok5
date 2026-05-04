@@ -2,18 +2,18 @@
 
 class Controller
 {
-    public function view($view, $data = [])
-    {
-        extract($data);
+   public function view($view, $data = [])
+{
+    extract($data);
 
-        $viewFile = __DIR__ . '/../app/views/' . $view . '.php';
+    ob_start();
+    require_once '../app/views/' . $view . '.php';
+    $content = ob_get_clean();
 
-        if (file_exists($viewFile)) {
-            require_once $viewFile;
-        } else {
-            echo "View '$view' tidak ditemukan.";
-        }
-    }
+    require_once '../app/views/layouts/header.php';
+    echo $content;
+    require_once '../app/views/layouts/footer.php';
+}
 
     public function model($model)
     {
