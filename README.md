@@ -5,7 +5,7 @@
 ### 👥 Identitas Kelompok
 
 * Nama Kelompok: Kelompok 5
-* Backend Engineer (BE): Noor Shahla Qeysha Revarani
+* Backend Engineer (BE): Noor Shahla Qeysha Revarani (2310010212)
 * Frontend Engineer (FE): Patimatul Jahrah (2310010234)
 * Documentation & Debugging Officer (DDO): Tasya Rosalinda (2310010225)
 
