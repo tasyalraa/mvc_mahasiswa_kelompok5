@@ -797,7 +797,7 @@ Hasil:
 
 #### 3. Hasil Export PDF
 
-![PDF](docs/sesi8_pdf.png)
+![PDF](docs/sesi8_pdff.png)
 
 ---
 
