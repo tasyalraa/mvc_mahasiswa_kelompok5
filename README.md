@@ -297,6 +297,516 @@ Beberapa kendala yang muncul:
 
 Pada sesi ini, aplikasi berhasil menampilkan data dari database ke dalam tampilan web. Implementasi Model mulai berjalan dengan baik dan memperkuat konsep MVC dalam pengembangan aplikasi.
 
+---
+
+# 📘 Sesi 4 – Menambahkan Data Mahasiswa
+
+### 🎯 Tujuan Sesi
+
+Pada sesi ini, kami mengimplementasikan fitur untuk menambahkan data mahasiswa ke dalam database melalui form. Proses ini melibatkan interaksi antara View, Controller, dan Model.
+
+---
+
+### 🧠 Konsep Dasar
+
+Alur penambahan data dalam MVC adalah:
+
+```text
+View (Form) → Controller → Model → Database
+```
+
+Penjelasan:
+
+* User mengisi form pada View
+* Data dikirim ke Controller menggunakan method POST
+* Controller memproses dan meneruskan ke Model
+* Model menyimpan data ke database
+
+---
+
+### ⚙️ Implementasi
+
+Pada sesi ini dilakukan:
+
+* Pembuatan form tambah data mahasiswa pada View
+* Penambahan method pada `MahasiswaController` untuk menangani input
+* Penambahan fungsi insert pada Model `Mahasiswa`
+* Proses penyimpanan data ke database
+
+---
+
+### 🧪 Hasil Pengujian
+
+Pengujian dilakukan dengan mengakses URL:
+
+```text
+http://mvc_mahasiswa_kelompok5.test/mahasiswa/tambah
+```
+
+Langkah pengujian:
+
+1. Mengisi form data mahasiswa
+2. Menekan tombol submit
+3. Sistem menyimpan data ke database
+4. Data baru muncul pada tabel mahasiswa
+
+Hasil:
+
+* Data berhasil ditambahkan ke database
+* Tidak terjadi error saat proses input
+* Tampilan tabel berhasil diperbarui
+
+---
+
+### 📸 Dokumentasi Screenshot
+
+#### 1. Form Tambah Mahasiswa
+
+![Form](docs/sesi4_form.png)
+
+#### 2. MahasiswaController (Method Tambah)
+
+![Controller](docs/sesi4_controller.png)
+
+#### 3. Model (Query Insert)
+
+![Model](docs/sesi4_model.png)
+
+#### 4. Hasil di Tabel
+
+![Output](docs/sesi4_output.png)
+
+---
+
+### 🐛 Kendala yang Dihadapi
+
+Beberapa kendala yang muncul:
+
+* Method tidak ditemukan karena perbedaan nama URL
+* Data tidak tersimpan akibat kesalahan query
+* Input form tidak terbaca karena `name` tidak sesuai
+
+---
+
+### ✅ Solusi
+
+* Menyesuaikan URL dengan method pada controller
+* Memperbaiki query INSERT pada Model
+* Menyamakan atribut `name` pada form dengan yang diproses di Controller
+
+---
+
+### 📌 Kesimpulan
+
+Pada sesi ini, fitur penambahan data mahasiswa berhasil diimplementasikan dengan baik. Aplikasi sudah mampu menerima input dari user dan menyimpannya ke dalam database.
+
+---
+
+# 📘 Sesi 5 – Update dan Delete Data Mahasiswa
+
+### 🎯 Tujuan Sesi
+
+Pada sesi ini, kami mengimplementasikan fitur untuk mengubah (update) dan menghapus (delete) data mahasiswa. Dengan demikian, operasi CRUD (Create, Read, Update, Delete) pada aplikasi telah lengkap.
+
+---
+
+### 🧠 Konsep Dasar
+
+#### ✏️ Update Data
+
+```text
+View (Form Edit) → Controller → Model → Database (UPDATE)
+```
+
+Penjelasan:
+
+* User memilih data yang ingin diedit
+* Data ditampilkan pada form edit
+* Setelah diubah, data dikirim ke controller
+* Model melakukan update ke database
+
+---
+
+#### 🗑️ Delete Data
+
+```text
+View (Tombol Delete) → Controller → Model → Database (DELETE)
+```
+
+Penjelasan:
+
+* User menekan tombol delete
+* Controller menerima ID data
+* Model menghapus data dari database
+
+---
+
+### ⚙️ Implementasi
+
+Pada sesi ini dilakukan:
+
+* Penambahan tombol **Edit** dan **Delete** pada tabel mahasiswa
+* Pembuatan method `edit()`, `update()`, dan `hapus()` pada `MahasiswaController`
+* Pembuatan query `UPDATE` dan `DELETE` pada Model
+* Pembuatan form edit untuk mengubah data
+
+---
+
+### 🧪 Hasil Pengujian
+
+#### 🔹 Update Data
+
+Langkah:
+
+1. Klik tombol Edit
+2. Mengubah data mahasiswa
+3. Submit form
+
+Hasil:
+
+* Data berhasil diperbarui di database
+* Perubahan langsung terlihat pada tabel
+
+---
+
+#### 🔹 Delete Data
+
+Langkah:
+
+1. Klik tombol Delete
+2. Menghapus data
+
+Hasil:
+
+* Data berhasil dihapus dari database
+* Data tidak lagi muncul di tabel
+
+---
+
+### 📸 Dokumentasi Screenshot
+
+#### 1. Tombol Edit dan Delete pada Tabel
+
+![Tombol](docs/sesi5_tombol.png)
+
+#### 2. Form Edit Mahasiswa
+
+![Form Edit](docs/sesi5_form_edit.png)
+
+#### 3. Controller (Update & Delete)
+
+Update
+
+![Controller](docs/sesi5_method_update.png)
+
+Delete
+
+![Controller](docs/sesi5_method_delete.png)
+
+#### 4. Hasil Update Data
+
+![Update](docs/sesi5_update.png)
+
+#### 5. Hasil Delete Data
+
+![Delete](docs/sesi5_delete.png)
+
+---
+
+### 🐛 Kendala yang Dihadapi
+
+Beberapa kendala yang muncul:
+
+* Data tidak berubah karena query UPDATE tidak sesuai
+* Data tidak terhapus karena ID tidak terbaca
+* Kesalahan pengiriman data dari form ke controller
+
+---
+
+### ✅ Solusi
+
+* Memastikan query UPDATE dan DELETE sesuai dengan struktur tabel
+* Mengirim parameter ID dengan benar
+* Menyesuaikan atribut `name` pada form dengan controller
+
+---
+
+### 📌 Kesimpulan
+
+Pada sesi ini, fitur update dan delete data mahasiswa berhasil diimplementasikan. Aplikasi telah memiliki fitur CRUD lengkap dan siap untuk pengembangan lebih lanjut.
+
+---
+
+# 📘 Sesi 6 – Search dan Filter Data Mahasiswa
+
+### 🎯 Tujuan Sesi
+
+Pada sesi ini, kami mengimplementasikan fitur pencarian (search) dan penyaringan (filter) data mahasiswa. Fitur ini memungkinkan pengguna untuk menampilkan data sesuai dengan kata kunci atau kategori tertentu.
+
+---
+
+### 🧠 Konsep Dasar
+
+#### 🔍 Search Data
+
+```sql
+SELECT * FROM mahasiswa 
+WHERE nama_lengkap LIKE '%keyword%' 
+OR npm LIKE '%keyword%'
+```
+
+Penjelasan:
+
+* Digunakan untuk mencari data berdasarkan kata kunci
+* Menggunakan operator `LIKE` agar pencarian fleksibel
+
+---
+
+#### 🧩 Filter Data
+
+```sql
+SELECT * FROM mahasiswa 
+WHERE jurusan = 'Informatika'
+```
+
+Penjelasan:
+
+* Digunakan untuk menyaring data berdasarkan kategori tertentu
+* Menggunakan kondisi `WHERE`
+
+---
+
+#### 🔗 Kombinasi Search & Filter
+
+```sql
+SELECT * FROM mahasiswa 
+WHERE nama_lengkap LIKE '%keyword%' 
+AND jurusan = 'Informatika'
+```
+
+Penjelasan:
+
+* Search dan filter dapat digunakan bersamaan
+* Query akan menyesuaikan berdasarkan input user
+
+---
+
+### ⚙️ Implementasi
+
+Pada sesi ini dilakukan:
+
+* Penambahan form search pada halaman mahasiswa
+* Penambahan dropdown filter jurusan
+* Pengambilan parameter menggunakan method GET
+* Pembuatan fungsi `searchAndFilter()` pada Model
+* Modifikasi query menggunakan kondisi dinamis
+
+---
+
+### 🧪 Hasil Pengujian
+
+Pengujian dilakukan pada halaman:
+
+```text
+http://mvc_mahasiswa_kelompok5.test/mahasiswa
+```
+
+Langkah:
+
+1. Menginput kata kunci pada kolom pencarian
+2. Memilih filter jurusan (opsional)
+3. Menekan tombol cari
+
+Hasil:
+
+* Data ditampilkan sesuai dengan kata kunci
+* Data dapat difilter berdasarkan jurusan
+* Kombinasi search dan filter berjalan dengan baik
+
+---
+
+### 📸 Dokumentasi Screenshot
+
+#### 1. Form Search dan Filter
+
+![Search Form](docs/sesi6_search_filter.png)
+
+#### 2. Controller (Logic Search & Filter)
+
+![Controller](docs/sesi6_controller.png)
+
+#### 3. Model (Query Search & Filter)
+
+![Model](docs/sesi6_model.png)
+
+#### 4. Hasil di Browser
+
+Search
+
+![Output](docs/sesi6_search.png)
+
+Filter
+
+![Output](docs/sesi6_filter.png)
+
+---
+
+### 🐛 Kendala yang Dihadapi
+
+Beberapa kendala yang muncul:
+
+* Data tidak berubah karena parameter tidak terbaca
+* Query tidak sesuai sehingga hasil tidak akurat
+* Input kosong tidak ditangani dengan baik
+
+---
+
+### ✅ Solusi
+
+* Menggunakan method GET untuk mengambil parameter dari URL
+* Menggunakan prepared statement untuk keamanan query
+* Menambahkan kondisi dinamis pada query sesuai input user
+
+---
+
+### 📌 Kesimpulan
+
+Pada sesi ini, fitur pencarian dan filter data mahasiswa berhasil diimplementasikan. Aplikasi menjadi lebih interaktif karena pengguna dapat mencari dan menyaring data sesuai kebutuhan.
+
+---
+
+# 📘 Sesi 7 – Implementasi Tampilan dengan Bootstrap
+
+### 🎯 Tujuan Sesi
+
+Pada sesi ini, kami mengimplementasikan tampilan antarmuka menggunakan Bootstrap agar aplikasi memiliki desain yang lebih modern, responsif, dan konsisten.
+
+---
+
+### 🧠 Konsep Dasar
+
+Bootstrap merupakan framework CSS yang digunakan untuk mempermudah pembuatan tampilan web yang rapi dan responsif tanpa harus menulis CSS dari awal.
+
+Dengan menggunakan Bootstrap, tampilan aplikasi menjadi:
+
+* Lebih modern
+* Responsif di berbagai perangkat
+* Konsisten di setiap halaman
+
+---
+
+### ⚙️ Implementasi
+
+Pada sesi ini dilakukan:
+
+* Menambahkan Bootstrap ke dalam project melalui CDN
+* Membuat layout menggunakan `header.php` dan `footer.php`
+* Menambahkan navbar pada aplikasi
+* Menerapkan class Bootstrap pada tabel dan form
+
+---
+
+### 🧪 Hasil Pengujian
+
+Hasil yang diperoleh:
+
+* Halaman mahasiswa tampil lebih rapi dan terstruktur
+* Form input terlihat lebih jelas dan mudah digunakan
+* Tampilan aplikasi menjadi lebih menarik dibandingkan sebelumnya
+
+---
+
+### 📸 Dokumentasi Screenshot
+
+#### 1. Halaman Index Mahasiswa (Bootstrap)
+
+![Index](docs/sesi7_index_bootstrap.png)
+
+#### 2. Form Tambah Mahasiswa
+
+![Form](docs/sesi7_form_create.png)
+
+---
+
+### 📌 Kesimpulan
+
+Pada sesi ini, implementasi Bootstrap berhasil meningkatkan tampilan aplikasi menjadi lebih modern, responsif, dan konsisten. Hal ini membuat aplikasi lebih nyaman digunakan oleh pengguna.
+
+---
+
+# 📘 Sesi 8 – Export Data dan Dokumentasi Akhir
+
+### 🎯 Tujuan Sesi
+
+Pada sesi ini, kami melakukan pengujian fitur export data serta menyusun dokumentasi akhir proyek. Fitur export memungkinkan data mahasiswa diunduh dalam format CSV dan PDF.
+
+---
+
+### ⚙️ Implementasi
+
+Pada sesi ini dilakukan:
+
+* Pengujian fitur **Export CSV**
+* Pengujian fitur **Export PDF**
+* Memastikan file dapat diunduh dan dibuka dengan baik
+* Menyusun dokumentasi akhir dalam file `README.md`
+
+---
+
+### 🧪 Hasil Pengujian
+
+#### 🔹 Export CSV
+
+Langkah:
+
+1. Klik tombol Export CSV
+2. File berhasil diunduh
+3. File dibuka menggunakan Microsoft Excel
+
+Hasil:
+
+* Data mahasiswa tampil lengkap dalam bentuk tabel
+* Format file sesuai dan dapat dibaca dengan baik
+
+---
+
+#### 🔹 Export PDF
+
+Langkah:
+
+1. Klik tombol Export PDF
+2. File berhasil diunduh
+3. File dibuka menggunakan PDF viewer
+
+Hasil:
+
+* Data mahasiswa ditampilkan dalam bentuk tabel
+* Tampilan rapi dan mudah dibaca
+
+---
+
+### 📸 Dokumentasi Screenshot
+
+#### 1. Tombol Export pada Halaman
+
+![Export Button](docs/sesi8_export_button.png)
+
+#### 2. Hasil Export CSV (Excel)
+
+![CSV](docs/sesi8_csv_excel.png)
+
+#### 3. Hasil Export PDF
+
+![PDF](docs/sesi8_pdf.png)
+
+---
+
+### 📌 Kesimpulan
+
+Fitur export data berhasil diimplementasikan dengan baik. Data mahasiswa dapat diunduh dalam format CSV dan PDF serta dapat dibuka tanpa kendala. Dokumentasi akhir juga telah disusun sebagai rangkuman seluruh proses pengembangan aplikasi.
+
+---
+
 # REST API Mahasiswa – PHP MVC
 
 ## Deskripsi
